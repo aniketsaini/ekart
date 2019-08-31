@@ -11,29 +11,9 @@ import { ProductService } from '../services/product.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  product: string = "assets/yellow-rose.jpg";
-  pink: string = "/assets/pink.jpg";
-  white: string = "/assets/white.jpeg";
-  blue: string = "/assets/blue.png";
-  lily: string = "/assets/lily.jpg";
-  tigerlily: string = "/assets/tiger-lily.jpg";
-  pinklotus: string = "/assets/pink-lotus.jpg";
-  sunflower: string = "/assets/sunflower.jpeg";
-  orchid: string = "/assets/orchid.jpg";
-  rosebuke: string = "/assets/rose-buke.jpg";
-  flowersbuke: string = "/assets/flowers-buke.jpg";
-  lilybuke: string = "/assets/lily-buke.jpg";
-  orchidbuke: string = "/assets/orchid-buke.jpg";
-  bridebuke: string = "/assets/bride-buke.jpg";
-  whitebuke: string = "/assets/white-buke.jpg";
-  babybreath: string = "/assets/babybreath.jpeg";
-  begonia: string = "/assets/begonia.jpeg";
-  alstroemeria: string = "/assets/alstroemeria.jpg";
 
   products: any;
 
-
-  
 
   constructor(
     private commonService: CommonService, 
@@ -55,7 +35,6 @@ export class HomePage {
 
   productList = async () => {
     this.products = await this.productService.getProductList();
-    console.log(this.products);
   }
 
 

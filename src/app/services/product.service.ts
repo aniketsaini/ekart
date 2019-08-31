@@ -26,7 +26,6 @@ export class ProductService {
         return { id, ...data };
       }))
     );
-
     this.productImages = this.productImageCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data();
@@ -37,16 +36,16 @@ export class ProductService {
   }
 
   getProductList = async () => {
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       this.products.subscribe(async (data) => {
         this.finalProducts = [];
         data.forEach(async (product) => {
-          let productImage: any = await this.getProductImages(product.id, true);
+          let productImage: any = await this.getAllProductImages(product.id, true);
           let productObject: any = {
             name: product.name,
             description: product.description,
             price: product.price,
-            url: productImage
+            url: productImage[0].url
           }
           this.finalProducts.push(productObject);
         });
@@ -55,28 +54,31 @@ export class ProductService {
     });
   }
 
-  getProductImages = async (productId, isDefault = false) => {
+  getAllProductImages = async (productId: string, isDefault: boolean = false) => {
     return new Promise((resolve) => {
       this.productImages.subscribe(async (data) => {
-        let productImages: Array<any[]> = [];
+        let finalProductImages: Array<any[]> = [];
+        var i = 0;
         data.forEach(async (productImage) => {
-          let productInfo = await productImage.product_id.get();
-          if (productInfo.id === productId) {
-            let productImageObject: any;
-            if (isDefault && productImage.is_default) {
-              productImageObject = {
-                url: productImage.url
+          let productInfo: any = await productImage.product_id.get();
+          i++;
+          if (productId === productInfo.id) {
+            if(isDefault && productImage.is_default){
+              let productImageObject: any = {
+                url: productImage.url,
               }
-              productImages.push(productImageObject);
-            } else if (!isDefault) {
-              productImageObject = {
-                url: productImage.url
+              finalProductImages.push(productImageObject);
+            } else if(!isDefault){
+              let productImageObject: any = {
+                url: productImage.url,
               }
-              productImages.push(productImageObject);
+              finalProductImages.push(productImageObject);
             }
           }
+          if(data.length === i){
+            resolve(finalProductImages);
+          }
         });
-        resolve(productImages);
       });
     });
   }
