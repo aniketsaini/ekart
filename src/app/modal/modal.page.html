@@ -1,0 +1,74 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="background">
+  <ion-buttons>
+    <ion-button (click)="dismiss()" slot="end">
+      <ion-icon slot="icon-only" name="close" color="dark"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <div class="filter">
+    <ion-item>
+      <ion-label>Colour Type</ion-label>
+      <ion-select>
+        <ion-select-option>Red</ion-select-option>
+        <ion-select-option>Green</ion-select-option>
+        <ion-select-option selected>Blue</ion-select-option>
+        <ion-select-option>Purple</ion-select-option>
+        <ion-select-option>White</ion-select-option>
+        <ion-select-option>Yellow</ion-select-option>
+        <ion-select-option>Pink</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-range min=" 1" max="10" pin color="dark">
+        <ion-icon slot="start" size="small" name="arrow-round-down"></ion-icon>
+        <ion-icon slot="end" size="small" name="arrow-round-up"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select>
+        <ion-select-option>Yellow Rose</ion-select-option>
+        <ion-select-option>Red Rose</ion-select-option>
+        <ion-select-option selected>White Rose</ion-select-option>
+        <ion-select-option>Blue Rose</ion-select-option>
+        <ion-select-option>White Lily</ion-select-option>
+        <ion-select-option>Tiger Lily</ion-select-option>
+        <ion-select-option>Pink Lotus</ion-select-option>
+        <ion-select-option>Sunflower</ion-select-option>
+        <ion-select-option>Orchid</ion-select-option>
+        <ion-select-option>Babybreath</ion-select-option>
+        <ion-select-option>Begonia</ion-select-option>
+        <ion-select-option>Alstroemeria</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label>Catogary</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Flowers</ion-label>
+        <ion-radio slot="start" value="flowers" color="dark"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Buke</ion-label>
+        <ion-radio slot="start" value="buke" checked color="dark"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Both</ion-label>
+        <ion-radio slot="start" value="both" color="dark"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <ion-button color="dark" slot="end" fill="outline">CONTINUE</ion-button>
+
+  </div>
+
+
+</ion-content>

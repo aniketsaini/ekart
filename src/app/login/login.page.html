@@ -1,0 +1,41 @@
+<ion-content class="background">
+
+  <div>
+    <h1>e-kart</h1>
+    <div class="all">
+    <form [formGroup]="loginData" (ngSubmit)="onClickSubmit(loginData.value)">
+      <div>
+        <ion-item>
+          <ion-label></ion-label>
+          <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+
+        </ion-item>
+        <div *ngIf="showError && loginData.controls.email.errors !== null" class="error">
+          <span class="error" *ngIf="loginData.controls.email.errors.required">Email is required</span>
+          <span class="error" *ngIf="loginData.controls.email.errors.pattern">Email is not valid</span>
+        </div>
+      </div>
+
+      <div class="space">
+        <ion-item>
+          <ion-label></ion-label>
+          <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+        </ion-item>
+        <div *ngIf="showError && loginData.controls.email.errors !== null" class="error">
+          <span class="error" *ngIf="loginData.controls.password.errors.required">Password is required</span>
+          <span class="error" *ngIf="loginData.controls.password.errors.minlength">Password is not valid</span>
+        </div>
+      </div>
+
+
+      <div>
+        <ion-button type="submit" size="medium" fill="outline" color="dark">Log in</ion-button>
+      </div>
+      <div class="link">
+        <p><a routerLink="/register">Sign Up</a></p>
+      </div>
+    </form>
+  </div>
+</div>
+
+</ion-content>

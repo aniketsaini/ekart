@@ -1,0 +1,41 @@
+.header-md:after{
+    position: unset;
+}
+ion-content{
+    
+        --background:rgb(218, 216, 216); 
+    ion-range{
+        --color:orange;
+    }
+    text-align: center;
+    .filter{
+        background-color: transparent;
+        width: 80%;
+        height:80%;
+        margin-left: 10%;
+        margin-top: 20%;
+        text-align: center;
+    }
+
+    ion-item{
+        --background:transparent;
+        margin-bottom: 20px;
+        --border-style:none;
+       
+    }
+           ion-icon{
+                font-size: 50px;
+                margin-top: 10px;
+            }
+            ion-button{
+                float: right;
+            }
+            ion-buttons{
+                float: right;
+                font-size: 50px;
+            }
+    }
+    .header-md:after {
+        display: none;
+    }
+    

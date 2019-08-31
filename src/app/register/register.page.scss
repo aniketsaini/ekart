@@ -1,0 +1,37 @@
+
+ ion-content.background{
+    --background: url(../../assets/orange.jpg) 0 0/100% 100% no-repeat;
+}
+ion-content{
+    text-align: center;
+    ion-button{
+        --padding-start:30px;
+        --padding-end:30px;
+        font-size: 20px;
+        margin-top: 50px;
+    }
+}
+ion-item{
+    --background:transparent;
+    --padding-start:20px;
+    --padding-end:20px;
+    --padding-top:30px;
+}
+ion-input{
+    --placeholder-opacity:0.4;
+}
+form{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 60px;
+}
+.error{
+    text-align: left;
+    color: red;
+    font-size: 15px;
+    padding-left: 10px;
+    opacity:0.9;
+}
+.header-md:after {
+    display: none;
+}

@@ -1,0 +1,56 @@
+<ion-toolbar>
+  <ion-title>Register</ion-title>
+
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="login" color="dark"></ion-back-button>
+  </ion-buttons>
+</ion-toolbar>
+
+
+
+<ion-content class="background">
+  <div class="container">
+    <form [formGroup]="registerData" (ngSubmit)="onClickSubmit(registerData.value)">
+      <div>
+        <ion-item>
+          <ion-label></ion-label>
+          <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+        </ion-item>
+        <div *ngIf="showError && registerData.controls.email.errors !== null" class="error">
+          <span class="error" *ngIf="registerData.controls.email.errors.required">Email is required</span>
+          <span class="error" *ngIf="registerData.controls.email.errors.pattern">Email is not valid</span>
+        </div>
+      </div>
+
+      <div>
+        <ion-item>
+          <ion-label></ion-label>
+          <ion-input type="password" formControlName="password" placeholder="Create Password"></ion-input>
+        </ion-item>
+        <div *ngIf="showError && registerData.controls.password.errors !== null" class="error">
+          <span class="error" *ngIf="registerData.controls.password.errors.required">Create Passwor is required</span>
+          <span class="error" *ngIf="registerData.controls.password.errors.minlength">Create Passwor is not valid</span>
+        </div>
+      </div>
+
+      <div>
+        <ion-item>
+          <ion-label></ion-label>
+          <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
+        </ion-item>
+        <div *ngIf="showError && registerData.controls.confirmPassword.errors !== null" class="error">
+          <span class="error" *ngIf="registerData.controls.confirmPassword.errors.required">Confirm Password is
+            required.</span>
+          <span class="error">Confirm Password and Password should match.</span>
+        </div>
+      </div>
+
+
+      <div>
+        <ion-button type="submit" size="medium" fill="outline" color="dark">Create Account</ion-button>
+      </div>
+
+    </form>
+  </div>
+
+</ion-content>

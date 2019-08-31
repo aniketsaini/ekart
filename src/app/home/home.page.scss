@@ -1,0 +1,91 @@
+ion-header { 
+    background-color: rgb(241, 240, 240);   
+    ion-toolbar {
+        --background:rgb(247, 144, 59); 
+        border-radius: 4px;
+        text-align: center;
+        font-size: 8px;
+        ion-buttons { 
+            ion-badge {
+                position: absolute;
+                top: 10%;
+                right: 12%;
+                font-size:8px;
+            }
+        }
+    }
+}
+
+ion-content {
+    ion-searchbar{
+        margin: 0;
+    }
+    --background:rgb(241, 240, 240);   
+    ion-grid{
+        margin-top: 0;
+        ion-col{
+            float: left;            
+        }
+    
+    }
+    ion-card{
+        margin: 0;
+        background-color:rgb(243, 156, 85); 
+        ion-card-content{
+            ion-img{
+                width: 100%;
+                height: auto;
+            }
+            ion-item{
+                --border-style:none;
+                --background:rgb(243, 156, 85); 
+                ion-button{
+                    --background:black;
+                    width: 100%;
+                    --background-activated:white;
+                    --color-activated:rgb(0, 0, 0); 
+                }   
+            }
+            ion-list{
+                background-color:rgb(243, 156, 85); 
+                padding: 0;
+                .price{
+                    margin-left: 2px;
+                }
+            }
+            padding: 10px;
+        }
+    }
+}
+.ion-padding {
+    --padding-start: 0;
+    --padding-end: 0;
+}
+.end{
+    width: 92%;
+    height: 30px;
+    background-color: rgb(207, 207, 207); 
+    text-align-last: center;
+    padding-top: 5px;
+    margin-left: 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.header-md:after{
+    position: unset;
+}
+
+ion-fab{
+    ion-fab-button{
+        --color: rgb(247, 144, 59); 
+        --background:rgb(255, 255, 255);
+        ion-icon {
+            font-size: 35px;
+        }
+    }
+}
+.header-md:after {
+    display: none;
+}
+
+
