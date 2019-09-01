@@ -10,13 +10,38 @@
 <ion-content>
   <div>
     <div class="slider">
-      <ion-img [src]="pink"></ion-img>
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let image of productInfo.images">
+          <ion-img src="{{image.url}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
     </div>
   </div>
   <div class="detail">
-    <p>
-      ieuhfywiusdoianjcvdsnksm
-    </p>
+    <ion-item>
+      <ion-label>Product Name:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Detail:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Quantity:</ion-label>
+      <ion-select>
+        <ion-select-option selected>1</ion-select-option>
+        <ion-select-option>2</ion-select-option>
+        <ion-select-option>3</ion-select-option>
+        <ion-select-option>4</ion-select-option>
+        <ion-select-option>5</ion-select-option>
+        <ion-select-option>6</ion-select-option>
+        <ion-select-option>7</ion-select-option>
+        <ion-select-option>8</ion-select-option>
+        <ion-select-option>9</ion-select-option>
+        <ion-select-option>10</ion-select-option>
+      </ion-select>
+    </ion-item>
   </div>
 </ion-content>
 

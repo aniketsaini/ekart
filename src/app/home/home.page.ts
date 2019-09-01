@@ -3,6 +3,7 @@ import { CommonService } from '../services/common.service';
 import { ModalController, PopoverController, NavController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { ProductService } from '../services/product.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class HomePage {
   constructor(
     private commonService: CommonService, 
     private modalController: ModalController,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) { }
 
   ionViewWillEnter() {
@@ -44,5 +46,14 @@ export class HomePage {
     } else {
       this.commonService.closeMenu();
     }
+  }
+
+  productDetails(productId){
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        id: productId
+      }
+    };
+    this.router.navigate(['product'], navigationExtras);
   }
 }

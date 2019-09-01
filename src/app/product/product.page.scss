@@ -24,6 +24,14 @@ ion-content{
             margin-top: 2px;
             float: left;
             color: black;
+            ion-item{
+                --background:transparent;
+                height: auto;
+                text-align: justify;
+                --padding-top:10px;
+                --padding-bottom:10px;
+                --border-style:none;
+            }
         }
     }
 ion-footer{

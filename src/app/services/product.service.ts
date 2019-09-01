@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { CommonService } from './common.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { resolve } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,7 @@ export class ProductService {
         data.forEach(async (product) => {
           let productImage: any = await this.getAllProductImages(product.id, true);
           let productObject: any = {
+            id: product.id,
             name: product.name,
             description: product.description,
             price: product.price,
@@ -54,6 +56,24 @@ export class ProductService {
     });
   }
 
+  getProductDetail = async (productId: string) => {
+    return new Promise((resolve) => {
+      var docRef = this.db.collection("products").doc(productId);
+
+      docRef.ref.get().then(function (doc) {
+        if (doc.exists) {
+          resolve(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          resolve([]);
+        }
+      }).catch(function (error) {
+        resolve([]);
+      });
+    });
+
+  }
+
   getAllProductImages = async (productId: string, isDefault: boolean = false) => {
     return new Promise((resolve) => {
       this.productImages.subscribe(async (data) => {
@@ -63,19 +83,19 @@ export class ProductService {
           let productInfo: any = await productImage.product_id.get();
           i++;
           if (productId === productInfo.id) {
-            if(isDefault && productImage.is_default){
+            if (isDefault && productImage.is_default) {
               let productImageObject: any = {
                 url: productImage.url,
               }
               finalProductImages.push(productImageObject);
-            } else if(!isDefault){
+            } else if (!isDefault) {
               let productImageObject: any = {
                 url: productImage.url,
               }
               finalProductImages.push(productImageObject);
             }
           }
-          if(data.length === i){
+          if (data.length === i) {
             resolve(finalProductImages);
           }
         });
