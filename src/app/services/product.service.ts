@@ -76,29 +76,28 @@ export class ProductService {
 
   getAllProductImages = async (productId: string, isDefault: boolean = false) => {
     return new Promise((resolve) => {
-      this.productImages.subscribe(async (data) => {
-        let finalProductImages: Array<any[]> = [];
-        var i = 0;
-        data.forEach(async (productImage) => {
-          let productInfo: any = await productImage.product_id.get();
-          i++;
-          if (productId === productInfo.id) {
-            if (isDefault && productImage.is_default) {
-              let productImageObject: any = {
-                url: productImage.url,
-              }
-              finalProductImages.push(productImageObject);
-            } else if (!isDefault) {
-              let productImageObject: any = {
-                url: productImage.url,
-              }
-              finalProductImages.push(productImageObject);
+      var productImages: Array<any> = [];
+      var docRef = this.db.collection("product_images");
+      var query = docRef.ref.where("productId", "==", productId);
+
+      query.get().then(function (querySnapshot) {
+        if(querySnapshot.empty){
+          resolve([]);
+        }
+        querySnapshot.forEach(function (doc) {
+          // doc.data() is never undefined for query doc snapshots
+          if(isDefault && doc.data().is_default){
+            productImages.push(doc.data());
+            resolve(productImages);
+          } else if(!isDefault){
+            productImages.push(doc.data());
+            if(productImages.length === querySnapshot.size){
+              resolve(productImages);
             }
           }
-          if (data.length === i) {
-            resolve(finalProductImages);
-          }
         });
+      }).catch(function (error) {
+        resolve([]);
       });
     });
   }
