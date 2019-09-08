@@ -7,7 +7,44 @@ ion-header{
     }
 }
 ion-content{
+    .image{
+        text-align: center;
+        background-color: rgb(243, 241, 241);
+        width: 68%;
+        height: 30%;
+        padding-bottom: 25px;
+        padding-top: 25px; 
+        float: left;
+       
+        ion-avatar{
+            height: 150px;
+            width: 150px; 
+            float: right;
+            margin-bottom: 2px;
+        }  
+        ion-button{
+            font-size: 15px;
+            --background:transparent;
+            --background-activated:transparent;
+            --background-focused:transparent;
+            --box-shadow:none;
+            margin: 0;
+            --color:black;
+            --color-activated:black;
+        }
+        ion-icon{
+            float:right;
+        }
+        }
+        .edit{
+            float: left;
+            width: 32%;
+            background-color: rgb(243, 241, 241);
+            height: 30%;
+            padding-top: 18%; 
+        }
     .container{
+        text-align: center;
         ion-button{
             --color-activated:rgb(0, 0, 0);
             --background-activated:orange;
@@ -21,31 +58,25 @@ ion-content{
         form{
             text-align: center;
            width: 80%;
-           margin-left: 6%;
+           margin-left: 10%;
+           .error{
+            text-align: left;
+            color: red;
+            font-size: 15px;
+           
+        }
             ion-item{
                 --background: transparent;
                 margin-bottom: 15px;
             }
         }
-        width: 90%;
-        height: 95%;
-        margin-left: 5%;
-        margin-top: 4%;
+        width: 100%;
+        height: 70%;
         background-color: rgb(243, 241, 241);
         border-radius: 4px;
         text-align: center;
         float: left;
-        .image{
-        text-align: center;
-        background-color: transparent;
-        width: 80%;
-        height: 30%;
-        margin-left: 10%;
-        ion-avatar{
-            font-size: 160px;
-            margin-left: 22%;
-        }
-        }
+       
     }
 }
 .header-md:after {

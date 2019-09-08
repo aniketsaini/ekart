@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ProductService } from '../services/product.service';
 
 
@@ -9,16 +9,14 @@ import { ProductService } from '../services/product.service';
   styleUrls: ['./product.page.scss'],
 })
 export class ProductPage implements OnInit {
-  pink: string = "assets/pink.jpg";
-  yellow: string = "assets/yellow-rose.jpg";
-  gray: string = "assets/orchid.jpg";
   productId: string = '';
   productInfo: any = {
     images: []
   };
+  quantity: Array<any> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400
   };
 
@@ -32,7 +30,7 @@ export class ProductPage implements OnInit {
         this.productId = params.id;
       }
     });
-   }
+  }
 
   ngOnInit() {
     this.getProductDetails();
@@ -40,7 +38,6 @@ export class ProductPage implements OnInit {
 
   getProductDetails = async () => {
     this.productInfo = await this.productService.getProductDetail(this.productId);
-    console.log(this.productInfo);
   }
 
 }

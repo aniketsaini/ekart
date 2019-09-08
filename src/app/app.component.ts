@@ -3,8 +3,8 @@ import { Platform, ModalController, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ModalPage } from './modal/modal.page';
-import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
+import { Router, NavigationExtras } from '@angular/router';
 import { async } from 'q';
 
 @Component({
@@ -13,8 +13,10 @@ import { async } from 'q';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  
 
   name='Admin';
+  userId: string;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -22,6 +24,7 @@ export class AppComponent {
     private modalController:ModalController,
     private menuController: MenuController,
     private routerController: Router,
+    private router: Router,
     private authService: AuthenticationService
   ) {
     this.initializeApp();
@@ -56,9 +59,14 @@ export class AppComponent {
     this.routerController.navigateByUrl("home");
   }
 
+
   profile = async () =>{
     this.menuController.close();
     this.routerController.navigateByUrl("profile");
   }
-  
+
+  ngOnInit() {
+   
+    
+  }
 }

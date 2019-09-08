@@ -9,13 +9,16 @@ ion-header{
 
 ion-content{
     .product{
-        background-color: rgb(231, 230, 230);
-        height: 100px;
+        background-color: rgb(247, 244, 244);
+        height: auto;
         width: 100%;
-        margin-top: 2px;
+        margin-top: 6px;
         float: left;
         display: block;
         border-radius: 2px;
+        padding-top: 6px;
+        padding-bottom: 5px;
+        border: 1px solid rgb(110, 109, 109);
         .image{
             height: 90px;
             width: 90px;
@@ -29,12 +32,13 @@ ion-content{
             float: left;
             text-align: left;
             display: block;
-            width: 30%;
+            width: auto;
             height: 25px;
             background-color: transparent;
             color: black;
-            margin-top: 12px;
-            margin-left: 5px;
+            margin-top: 0px;
+            margin-left: 15px;
+            margin-bottom: 5px;
         }
         .price{
             float: left;
@@ -45,32 +49,45 @@ ion-content{
             background-color: transparent;
             color: black;
             margin-top: 1px;
-            margin-left: 5px;
+            margin-left: 15px;
         }
         .quantity{
+            margin-top: 0;
             float: left;
-            text-align: left;
-            display: block;
-            width: 30%;
-            height: 25px;
             background-color: transparent;
             color: black;
-            margin-top: 1px;
-            margin-left: 5px;
+            ion-item{
+                --background:transparent;
+                border-radius: 7px;
+                padding: 0;
+                width: 140px;
+                height: 45px;
+                
+                ion-label{
+                    font-size: 15px;
+                    width: 40px;
+                    margin: 0;
+                    padding: 0;
+                }
+                ion-select{
+                    font-size: 15px;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
         }
         .total{
-            height: 90px;
-            width: 30%;
+            height: 70px;
+            width: 20%;
             float: right;
-            background-color: rgb(231, 230, 230);
-            margin-top: 5px;
+            background-color:transparent;
             display: block;
-            margin-right: 5px;
             text-align: center;
-            padding-top: 5%;
             font-size: 25px;
             color: black;
-            border-radius: 2px;
+            border-left: 1px solid rgb(110, 109, 109);
+            margin-top: 15px;
+            padding-top: 10px;
             .count{
             text-align: center;
             font-size: 15px;

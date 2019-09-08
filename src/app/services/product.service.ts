@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { CommonService } from './common.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { resolve } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +14,6 @@ export class ProductService {
   productImageCollection: AngularFirestoreCollection<any[]>;
   constructor(
     private db: AngularFirestore,
-    private commonService: CommonService
   ) {
     this.productCollection = this.db.collection<any[]>('products');
     this.productImageCollection = this.db.collection<any[]>('product_images');
@@ -56,15 +53,23 @@ export class ProductService {
     });
   }
 
-  getProductDetail = async (productId: string) => {
+  getProductDetail = async (productId: string, isDefault: boolean = false) => {
+    let cthis = this;
     return new Promise((resolve) => {
       var docRef = this.db.collection("products").doc(productId);
 
-      docRef.ref.get().then(function (doc) {
+      docRef.ref.get().then(async function (doc) {
         if (doc.exists) {
-          resolve(doc.data());
+          let productImage: any = await cthis.getAllProductImages(doc.id, isDefault);
+          let productDetail: any  = {
+            id: productId,
+            name: doc.data().name,
+            price: doc.data().price,
+            description: doc.data().description,
+            images: productImage
+          }
+          resolve(productDetail);
         } else {
-          // doc.data() will be undefined in this case
           resolve([]);
         }
       }).catch(function (error) {
@@ -78,14 +83,13 @@ export class ProductService {
     return new Promise((resolve) => {
       var productImages: Array<any> = [];
       var docRef = this.db.collection("product_images");
-      var query = docRef.ref.where("productId", "==", productId);
+      var query = docRef.ref.where("product_id", "==", productId);
 
       query.get().then(function (querySnapshot) {
         if(querySnapshot.empty){
           resolve([]);
         }
         querySnapshot.forEach(function (doc) {
-          // doc.data() is never undefined for query doc snapshots
           if(isDefault && doc.data().is_default){
             productImages.push(doc.data());
             resolve(productImages);

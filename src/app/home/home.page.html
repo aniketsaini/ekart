@@ -8,11 +8,11 @@
     <ion-title>
       e-kart
     </ion-title>
-    <ion-buttons slot="end"  routerLink="/cart">
+    <ion-buttons slot="end" routerLink="/cart">
       <ion-button>
-        <ion-icon slot="icon-only" name="cart" color="dark" ></ion-icon>
+        <ion-icon slot="icon-only" name="cart" color="dark"></ion-icon>
       </ion-button>
-      <ion-badge color="danger">0</ion-badge>
+      <ion-badge color="danger">{{cartCounter}}</ion-badge>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -24,11 +24,11 @@
 
   <ion-grid>
     <ion-row size="12">
-      <ion-col size="6" *ngFor="let product of products" >
+      <ion-col size="6" *ngFor="let product of products">
         <div>
-          <ion-card (click)="productDetails(product.id)">
+          <ion-card>
             <ion-card-content>
-              <ion-img src="{{ product.url }}"></ion-img>
+              <ion-img src="{{ product.url }}" (click)="productDetails(product.id)"></ion-img>
               <ion-list>
                 <ion-item>
                   <ion-label>
@@ -37,7 +37,7 @@
                   </ion-label>
                 </ion-item>
                 <ion-item>
-                  <ion-button>Add to cart</ion-button>
+                  <ion-button (click)="addToCart(product.id)">Add to cart</ion-button>
                 </ion-item>
               </ion-list>
             </ion-card-content>
@@ -51,7 +51,7 @@
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="openModal()">
-        <ion-icon name="funnel"></ion-icon>
+      <ion-icon name="funnel"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 

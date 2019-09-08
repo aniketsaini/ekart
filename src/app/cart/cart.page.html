@@ -8,38 +8,35 @@
 </ion-header>
 
 <ion-content>
-  <div class="product">
+  <div class="product" *ngFor="let productInfo of cartProducts">
     <div class="image">
-        <ion-img [src]="pink"></ion-img>
+      <ion-img src="{{productInfo.url[0]['url']}}"></ion-img>
     </div>
     <div class="total">
       Total
-      <div class="count"> 23$</div>
+      <div class="count">${{ productInfo.quantity * productInfo.price }}</div>
     </div>
-    <div class="name">Red Rose</div>
-    <div class="price">1.2$</div>
+    <div class="name">Name: {{ productInfo.name }}</div>
+    <div class="price">Price: ${{ productInfo.price }}</div>
     <div class="quantity">
+      <ion-item>
+        <ion-label>Qty:</ion-label>
+        <ion-select>
+            <ion-select-option 
+              *ngFor="let i of quantity"
+              [selected]="productInfo.quantity === i"
+            >
+            {{i}}
+            </ion-select-option>
+        </ion-select>
+      </ion-item>
     </div>
   </div>
-
-  <div class="product">
-      <div class="image">
-          <ion-img [src]="pink"></ion-img>
-      </div>
-      <div class="total">
-        Total
-        <div class="count"> 23$</div>
-      </div>
-      <div class="name">Red Rose</div>
-      <div class="price">1.2$</div>
-      <div class="quantity">
-      </div>
-    </div>
 
 </ion-content>
 
 <ion-footer>
 
-  <ion-button expand="block" fill="outline" >Checkout</ion-button>
+  <ion-button expand="block" fill="outline">Checkout</ion-button>
 
 </ion-footer>

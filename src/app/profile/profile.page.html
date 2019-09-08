@@ -8,25 +8,68 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
-    <div class="image">
-      
-    </div>
-    <form>
-      <ion-item>
-        <ion-input placeholder="Full Name" type="text"></ion-input>
-      </ion-item>
 
-      <ion-item>
-        <ion-input placeholder="Phone no." type="number"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input placeholder="Email Address" type="email"></ion-input>
-      </ion-item>
-    </form>
-    <ion-button fill="outline" color="danger">Edit</ion-button>
-    <ion-button fill="outline" color="success">Save</ion-button>
+  <div class="image">
+    <ion-avatar>
+      <ion-img [src]="cameraPicture"></ion-img>
+    </ion-avatar>
   </div>
 
+  <div class="edit">
+    <ion-buttons>
+      <ion-button (click)="openCamera()">
+        <ion-icon slot="icon-only" name="create" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  <div class="container">
+
+    <form [formGroup]="profile">
+
+      <ion-item>
+        <ion-label position="stacked">Email Address</ion-label>
+        <ion-input readonly type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngIf="showError && profile.controls.email.errors !== null" class="error">
+        <span class="error" *ngIf="profile.controls.email.errors.required">Email is required</span>
+        <span class="error" *ngIf="profile.controls.email.errors.pattern">Email is not valid</span>
+      </div>
+
+
+      <ion-item>
+        <ion-label position="stacked">First Name</ion-label>
+        <ion-input formControlName="firstName"></ion-input>
+      </ion-item>
+      <div *ngIf="showError && profile.controls.firstName.errors !== null" class="error">
+        <span class="error" *ngIf="profile.controls.firstName.errors.required">First Name is required</span>
+        <span class="error" *ngIf="profile.controls.firstName.errors.minlength">First Name is not valid</span>
+      </div>
+
+
+      <ion-item>
+        <ion-label position="stacked">Last Name</ion-label>
+        <ion-input formControlName="lastName"></ion-input>
+      </ion-item>
+      <div *ngIf="showError && profile.controls.lastName.errors !== null" class="error">
+        <span class="error" *ngIf="profile.controls.lastName.errors.required">Last Name is required</span>
+        <span class="error" *ngIf="profile.controls.lastName.errors.minlength">Last Name is not valid</span>
+      </div>
+
+
+      <ion-item>
+        <ion-label position="stacked">Phone no.</ion-label>
+        <ion-input type="number" formControlName="phoneNumber"></ion-input>
+      </ion-item>
+
+      <div *ngIf="showError && profile.controls.phoneNumber.errors !== null" class="error">
+        <span class="error" *ngIf="profile.controls.phoneNumber.errors.required">Phone number is required</span>
+        <span class="error" *ngIf="profile.controls.phoneNumber.errors.minlength">Phone number is not valid</span>
+      </div>
+
+      <div>
+        <ion-button fill="outline" color="success" type="submit" (click)="onClickSubmit(profile.value)">Save</ion-button>
+      </div>
+    </form>
+  </div>
 </ion-content>
