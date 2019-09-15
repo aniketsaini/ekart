@@ -19,6 +19,7 @@ export class HomePage {
   cartCounter: number = 0;
   userId: any;
   total:any;
+  searchTerm: any;
 
   constructor(
     private commonService: CommonService,
@@ -37,6 +38,10 @@ export class HomePage {
 
   }
 
+  async onSearch(e){
+    await this.productList(e.target.value);
+  }
+
   async openModal() {
     const myModal = await this.modalController.create({
       component: ModalPage
@@ -44,8 +49,8 @@ export class HomePage {
     return await myModal.present();
   }
 
-  productList = async () => {
-    this.products = await this.productService.getProductList();
+  productList = async (name: string = "") => {
+    this.products = await this.productService.getFilteredProductList(name);
   }
 
 

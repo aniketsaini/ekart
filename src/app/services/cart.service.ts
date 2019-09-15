@@ -34,6 +34,8 @@ export class CartService {
         querySnapshot.forEach(async function (doc) {
           let productDetails: any = await cthis.productService.getProductDetail(doc.data().product_id, true);
           let productInfo: any = {
+            id: doc.id,
+            product_id: productDetails.id,
             quantity: doc.data().quantity,
             name: productDetails.name,
             price: productDetails.price,

@@ -4,8 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonService } from '../services/common.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { storage, initializeApp } from 'firebase';
-import { environment } from 'src/environments/environment';
+import { storage } from 'firebase';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -24,10 +24,10 @@ export class ProfilePage implements OnInit {
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
-    private camera: Camera
+    private camera: Camera,
+    public actionSheetController: ActionSheetController
   ) {
-    initializeApp(environment.firebase);
-
+    
     this.route.queryParams.subscribe(params => {
       if (params && params.id) {
         this.productId = params.id;
@@ -65,6 +65,8 @@ export class ProfilePage implements OnInit {
       this.profile.controls.firstName.setValue(userInfo.first_name);
       this.profile.controls.lastName.setValue(userInfo.last_name);
       this.profile.controls.phoneNumber.setValue(userInfo.phone);
+      if(userInfo.profile_picture)
+        this.cameraPicture = userInfo.profile_picture;
     } else {
       this.profile.controls.email.setValue(userId.email);
     }
@@ -82,6 +84,7 @@ export class ProfilePage implements OnInit {
         last_name: data.lastName,
         email: data.email,
         phone: data.phoneNumber,
+        profile_picture: userInfo.profile_picture,
         user_id: userId.uid
       }
       let resp;
@@ -98,29 +101,75 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  chooseCamera = async () => {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Choose',
+      buttons: [{
+        text: 'Camera',
+        handler: () => {
+          this.openCamera(1);
+        }
+      }, {
+        text: 'Gallery',
+        handler: () => {
+          this.openCamera(2);
+        }
+      },{
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
 
-  openCamera = () => {
+
+  openCamera = async (type) => {
+
+
    
       const options: CameraOptions = {
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
-        cameraDirection: this.camera.Direction.FRONT
+        cameraDirection: this.camera.Direction.FRONT,
+        sourceType: type == 1?this.camera.PictureSourceType.CAMERA:this.camera.PictureSourceType.PHOTOLIBRARY
       }
 
-      
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
+    try {
+      let imageData = await this.camera.getPicture(options);
+      this.commonService.showLoader("Uploading...");
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       const cameraPicture = base64Image;
-      const pictures = storage().ref('usersPicture');
-      pictures.putString(cameraPicture,'data_url')
-     }, (err) => {
-      // Handle error
-      alert(err);
-     });
+      const fileName = this.commonService.makeid(8)+".jpg";
+      const pictures = storage().ref(fileName);
+      let snapshot = await pictures.putString(cameraPicture,'data_url');
+      let downloadURL = await snapshot.ref.getDownloadURL();
+      this.cameraPicture = downloadURL;
+      let userId: any = await this.authService.getUserInfo();
+      let userInfo: any = await this.authService.getUserDetails(userId.uid);
+      let userDetail: any = {
+        first_name: this.profile.controls.firstName.value,
+        last_name: this.profile.controls.lastName.value,
+        email: this.profile.controls.email.value,
+        phone: this.profile.controls.phoneNumber.value,
+        profile_picture: downloadURL,
+        user_id: userId.uid
+      }
+      let resp = await this.authService.updateUserDetails(userDetail, userInfo.id);
+      this.commonService.hideLoader();
+      if(resp){
+        this.commonService.showSuccessMessage("Picture has been uploaded");
+      } else {
+        this.commonService.showErrorMessage("Something occured during upload");
+      }
+    } catch (error) {
+      this.commonService.showErrorMessage(error);
+    }
 
   }
 }

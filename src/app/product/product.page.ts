@@ -12,7 +12,7 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./product.page.scss'],
 })
 export class ProductPage implements OnInit {
-  total: number;
+  total: number = 0;
   cartCounter: number = 0;
   products: any;
   userId: any;
@@ -53,7 +53,7 @@ export class ProductPage implements OnInit {
     this.productInfo = await this.productService.getProductDetail(this.productId);
   }
   productList = async () => {
-    this.products = await this.productService.getProductList();
+    this.products = await this.productService.getFilteredProductList();
   }
 
   async ionViewWillEnter() {
@@ -61,10 +61,13 @@ export class ProductPage implements OnInit {
     let cartDetails: any = await this.cartService.getCartDetails(this.userId.uid);
     this.cartCounter = cartDetails.length;
     this.productList();
-
   }
 
   async addToCart(productId: any) {
+    if(this.total === 0){
+      this.commonService.showErrorMessage("Please select quantity");
+      return;
+    }
     let cartDetail: any = await this.cartService.getCart(productId, this.userId.uid);
     let productInfo: any = {
       product_id: productId,

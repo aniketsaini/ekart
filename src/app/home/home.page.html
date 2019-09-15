@@ -19,7 +19,7 @@
 
 <ion-content fullscreen class="ion-padding">
 
-  <ion-searchbar animated placeholder="Find product..." search-icon="search"></ion-searchbar>
+  <ion-searchbar class="searchbar" (ionInput)="onSearch($event)"></ion-searchbar>
 
 
   <ion-grid>

@@ -11,14 +11,14 @@ ion-header{
 }
 ion-content{
     .container{
-    background-color:rgb(211, 209, 208);
+    background-color:rgb(238, 235, 235);
     width: 96%;
     height: auto;
     margin-left: 2%;
     margin-top: 10px;
     border-radius: 2px;
     float: left;
-    color: rgb(39, 38, 38);
+    color: black;
     }
     .date{
         width: 100%;
@@ -30,13 +30,16 @@ ion-content{
         margin-bottom: 10px;
     }
     .amount{
+        background-color: rgb(241, 238, 238);
         width: 100%;
         height: auto;
         float: left;
         text-align: center;
         font-size: 25px;
-        border-top: 2px solid rgb(24, 23, 23);
+        border: 2px solid rgb(153, 151, 151);
+        border-radius: 3px;
         .left{
+        background-color: transparent;
         width: 50%;
         height: auto;
         float: left;
@@ -44,6 +47,7 @@ ion-content{
         font-size: 25px;
         }
         .right{
+        background-color: transparent;
         width: 50%;
         height: 2cm;
         float: left;
@@ -58,7 +62,7 @@ ion-content{
         text-align: center;
         margin-left: 2%;
         margin-bottom: 10px;
-        background-color:rgb(235, 232, 232); 
+        background-color:rgb(255, 255, 255); 
         border-radius: 2px;
         .image{
         width: 25%;

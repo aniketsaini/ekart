@@ -4,8 +4,6 @@ import * as firebase from 'firebase/app';
 import { CommonService } from './common.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore, fromDocRef } from 'angularfire2/firestore';
-import { promise } from 'protractor';
-import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +79,7 @@ export class AuthenticationService {
             last_name: doc.data().last_name,
             email: doc.data().email,
             phone: doc.data().phone,
+            profile_picture: doc.data().profile_picture,
             user_id: doc.data().user_id,
             id: doc.id
           }

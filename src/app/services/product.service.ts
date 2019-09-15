@@ -1,56 +1,52 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  products: Observable<any[]>;
-  productCollection: AngularFirestoreCollection<any[]>;
-  finalProducts: Array<any[]> = [];
-  productImages: Observable<any[]>;
-  productImageCollection: AngularFirestoreCollection<any[]>;
+  
   constructor(
     private db: AngularFirestore,
   ) {
-    this.productCollection = this.db.collection<any[]>('products');
-    this.productImageCollection = this.db.collection<any[]>('product_images');
-    this.products = this.productCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-    this.productImages = this.productImageCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
   }
 
-  getProductList = async () => {
-    return new Promise(async (resolve) => {
-      this.products.subscribe(async (data) => {
-        this.finalProducts = [];
-        data.forEach(async (product) => {
-          let productImage: any = await this.getAllProductImages(product.id, true);
+
+  getFilteredProductList = async (name: string = "", price: number = 0) => {
+    let cthis = this;
+    return new Promise((resolve) => {
+      var productList: Array<any> = [];
+      var docRef = this.db.collection("products");
+      var query;
+      if (name !== "") {
+        query = docRef.ref.orderBy("name").startAt(name).endAt(name+"\uf8ff");
+      } else {
+        query = docRef.ref.where("price", ">", price);
+      }
+
+      query.get().then(function (querySnapshot) {
+        if (querySnapshot.empty) {
+          resolve([]);
+        }
+        querySnapshot.forEach(async function (doc) {
+          let productImage: any = await cthis.getAllProductImages(doc.id, true);
           let productObject: any = {
-            id: product.id,
-            name: product.name,
-            description: product.description,
-            price: product.price,
+            id: doc.id,
+            name: doc.data().name,
+            description: doc.data().description,
+            price: doc.data().price,
             url: productImage[0].url
           }
-          this.finalProducts.push(productObject);
+          productList.push(productObject);
+          if (productList.length === querySnapshot.size) {
+            resolve(productList);
+          }
         });
-        resolve(this.finalProducts);
+      }).catch(function (error) {
+        resolve([]);
       });
     });
+
   }
 
   getProductDetail = async (productId: string, isDefault: boolean = false) => {
@@ -105,5 +101,4 @@ export class ProductService {
       });
     });
   }
-
 }

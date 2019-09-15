@@ -21,7 +21,7 @@
     <div class="quantity">
       <ion-item>
         <ion-label>Qty:</ion-label>
-        <ion-select>
+        <ion-select (ionChange)="updateCart(productInfo.product_id, $event)">
           <ion-select-option *ngFor="let i of quantity" [selected]="productInfo.quantity === i" >
             {{i}}
           </ion-select-option>

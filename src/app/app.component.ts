@@ -5,7 +5,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ModalPage } from './modal/modal.page';
 import { AuthenticationService } from './services/authentication.service';
 import { Router, NavigationExtras } from '@angular/router';
-import { async } from 'q';
+import { initializeApp } from 'firebase';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +36,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      initializeApp(environment.firebase);
     });
   }
 
