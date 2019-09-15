@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
-
+  pink: string = "/assets/sunflower.jpeg";
+  todaydate = new Date();
+  
   constructor() { }
 
   ngOnInit() {

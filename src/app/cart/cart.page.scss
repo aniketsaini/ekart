@@ -27,6 +27,10 @@ ion-content{
             margin-top: 5px;
             margin-left: 5px;
             display: block;
+            ion-img{
+                width: 90px;
+                height: 90px;
+            }
         }
         .name{
             float: left;

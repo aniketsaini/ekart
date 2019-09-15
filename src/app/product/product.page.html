@@ -20,31 +20,35 @@
     </div>
     <div class="detail">
       <ion-item>
-        <ion-label position="stacked">Product Name:</ion-label>
-        {{ productInfo.name }}
+        <ion-label>Product Name:</ion-label>
+        <ion-text>{{ productInfo.name }}</ion-text>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Price:</ion-label>
-        {{ productInfo.price }}
+        <ion-label>Price:</ion-label>
+        <ion-text>${{ productInfo.price }}</ion-text>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Detail:</ion-label>
-        {{ productInfo.description }}
+        <ion-text>{{ productInfo.description }}</ion-text>
       </ion-item>
       <div class="select">
+
         <ion-item>
           <ion-label>
             <ion-text>Quantity:</ion-text>
           </ion-label>
-          <ion-select>
-            <ion-select-option *ngFor="let i of quantity">{{i}}</ion-select-option>
-          </ion-select>
+          <ion-input>
+            <ion-select [(ngModel)]="total">
+              <ion-select-option *ngFor="let i of quantity" [selected]="productInfo.quantity === i">{{i}}</ion-select-option>
+            </ion-select>
+          </ion-input>
         </ion-item>
+
       </div>
     </div>
   </div>
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="block" fill="outline" >Add to Cart</ion-button>
+  <ion-button expand="block" fill="outline" (click)="addToCart(productId)">Add to Cart</ion-button>
 </ion-footer>

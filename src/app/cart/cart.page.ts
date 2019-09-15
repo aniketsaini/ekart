@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { CartService } from '../services/cart.service';
@@ -19,23 +18,20 @@ export class CartPage implements OnInit {
     private router: Router,
     private authService: AuthenticationService,
     private route: ActivatedRoute
-  ) { 
-    
+  ) {
+
   }
 
   ngOnInit() {
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.showCartDetails();
   }
 
-  async showCartDetails(){
+  async showCartDetails() {
     let userId: any = await this.authService.getUserInfo();
     this.cartProducts = await this.cartService.getCartDetails(userId.uid);
-    console.log(this.cartProducts);
   }
 
 }
-
-

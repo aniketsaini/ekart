@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>orders</ion-title>
+    <ion-title>Orders</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home" color="dark"></ion-back-button>
     </ion-buttons>
@@ -8,5 +8,46 @@
 </ion-header>
 
 <ion-content>
+
+  <div class="container">
+
+    <div class="date">
+       {{todaydate | date:'d MMM y'}}
+    </div>
+
+    <div class="product">
+
+      <div class="image">
+        <ion-img [src]="pink"></ion-img>
+      </div>
+
+      <div class="name">
+        <p>Name:</p>
+      </div>
+
+      <div class="total">
+        <p>Total $1000</p>
+      </div>
+
+      <div class="quantity">
+        <p>Qty:</p>
+      </div>
+
+      <div class="price">
+        <p>Price: $200</p>
+      </div>
+
+    </div>
+
+    <div class="amount">
+      <div class="left">
+        <p>Total Amount:</p>
+      </div>
+
+      <div class="right">
+      </div>
+    </div>
+
+  </div>
 
 </ion-content>

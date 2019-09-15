@@ -18,7 +18,7 @@ export class HomePage {
   products: any;
   cartCounter: number = 0;
   userId: any;
-
+  total:any;
 
   constructor(
     private commonService: CommonService,

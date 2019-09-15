@@ -1,3 +1,115 @@
 .header-md:after {
     display: none;
 }
+ion-header{
+    ion-toolbar{
+        --background:rgb(248, 149, 68); 
+        border-radius: 4px;
+        font-size: 8px; 
+        color: black;
+    }
+}
+ion-content{
+    .container{
+    background-color:rgb(211, 209, 208);
+    width: 96%;
+    height: auto;
+    margin-left: 2%;
+    margin-top: 10px;
+    border-radius: 2px;
+    float: left;
+    color: rgb(39, 38, 38);
+    }
+    .date{
+        width: 100%;
+        height: auto;
+        float: left;
+        text-align: center;
+        font-size: 25px;
+        padding-top: 5px;
+        margin-bottom: 10px;
+    }
+    .amount{
+        width: 100%;
+        height: auto;
+        float: left;
+        text-align: center;
+        font-size: 25px;
+        border-top: 2px solid rgb(24, 23, 23);
+        .left{
+        width: 50%;
+        height: auto;
+        float: left;
+        text-align: center;
+        font-size: 25px;
+        }
+        .right{
+        width: 50%;
+        height: 2cm;
+        float: left;
+        text-align: center;
+        font-size: 25px;
+        }
+    }
+    .product{
+        width: 96%;
+        height: auto;
+        float: left;
+        text-align: center;
+        margin-left: 2%;
+        margin-bottom: 10px;
+        background-color:rgb(235, 232, 232); 
+        border-radius: 2px;
+        .image{
+        width: 25%;
+        height: 100px;
+        float: left;
+        text-align: center;
+      
+        padding: 6px;
+        ion-img{
+            width: 100%;
+            height: 100%;
+        }
+        }
+        .name{
+        width: 50%;
+        height: 50px;
+        float: left;
+        text-align: left;
+        font-size: 18px;
+        border-bottom: 1px solid rgb(63, 63, 63);
+        padding-left: 5px;
+        }
+        .total{
+        width: 25%;
+        height: 100px;
+        float: right;
+        text-align: center; 
+        font-size: 25px;
+        border-left: 1px solid rgb(214, 210, 210);
+        border-radius: 1px;
+        }
+        .quantity{
+        width: 25%;
+        height: 50px;
+        float: left;
+        text-align: center; 
+        border-right: 1px solid rgb(63, 63, 63);
+        ion-item{
+            width: auto;
+            float: right;
+            height: auto;
+            ion-input{
+                width: 15px;
+            }
+        }
+        }
+        .price{
+        width: 25%;
+        height: 50px;
+        float: left;
+        text-align: center; 
+        }
+    }
+}

@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ProductService } from './product.service';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class CartService {   
+  cart: any;
+  updateCartItems(arg0: any) {
+    throw new Error("Method not implemented.");
+  }
+  getCartItems() {
+    throw new Error("Method not implemented.");
+  }
 
   constructor(
     private db: AngularFirestore,

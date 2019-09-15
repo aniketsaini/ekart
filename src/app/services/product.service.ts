@@ -61,7 +61,7 @@ export class ProductService {
       docRef.ref.get().then(async function (doc) {
         if (doc.exists) {
           let productImage: any = await cthis.getAllProductImages(doc.id, isDefault);
-          let productDetail: any  = {
+          let productDetail: any = {
             id: productId,
             name: doc.data().name,
             price: doc.data().price,
@@ -86,16 +86,16 @@ export class ProductService {
       var query = docRef.ref.where("product_id", "==", productId);
 
       query.get().then(function (querySnapshot) {
-        if(querySnapshot.empty){
+        if (querySnapshot.empty) {
           resolve([]);
         }
         querySnapshot.forEach(function (doc) {
-          if(isDefault && doc.data().is_default){
+          if (isDefault && doc.data().is_default) {
             productImages.push(doc.data());
             resolve(productImages);
-          } else if(!isDefault){
+          } else if (!isDefault) {
             productImages.push(doc.data());
-            if(productImages.length === querySnapshot.size){
+            if (productImages.length === querySnapshot.size) {
               resolve(productImages);
             }
           }
