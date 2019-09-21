@@ -20,8 +20,12 @@ ion-content{
    
         .slider{
             width:80%;
-            height: 40%;
+            height: auto;
             margin-left: 10%;  
+            ion-img{
+                width: 100%;
+                height: auto;
+            }
         }
         .detail{
             width: 80%;

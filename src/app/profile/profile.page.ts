@@ -17,7 +17,7 @@ export class ProfilePage implements OnInit {
   profile: FormGroup;
   showError: boolean = false;
   productId: any;
-  cameraPicture: any = "assets/blue.png";
+  cameraPicture: any = "assets/profile.svg";
 
   constructor(
     private commonService: CommonService,
@@ -27,7 +27,7 @@ export class ProfilePage implements OnInit {
     private camera: Camera,
     public actionSheetController: ActionSheetController
   ) {
-    
+
     this.route.queryParams.subscribe(params => {
       if (params && params.id) {
         this.productId = params.id;
@@ -65,7 +65,7 @@ export class ProfilePage implements OnInit {
       this.profile.controls.firstName.setValue(userInfo.first_name);
       this.profile.controls.lastName.setValue(userInfo.last_name);
       this.profile.controls.phoneNumber.setValue(userInfo.phone);
-      if(userInfo.profile_picture)
+      if (userInfo.profile_picture)
         this.cameraPicture = userInfo.profile_picture;
     } else {
       this.profile.controls.email.setValue(userId.email);
@@ -114,7 +114,7 @@ export class ProfilePage implements OnInit {
         handler: () => {
           this.openCamera(2);
         }
-      },{
+      }, {
         text: 'Cancel',
         icon: 'close',
         role: 'cancel',
@@ -129,25 +129,23 @@ export class ProfilePage implements OnInit {
 
   openCamera = async (type) => {
 
-
-   
-      const options: CameraOptions = {
-        quality: 100,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
-        cameraDirection: this.camera.Direction.FRONT,
-        sourceType: type == 1?this.camera.PictureSourceType.CAMERA:this.camera.PictureSourceType.PHOTOLIBRARY
-      }
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      cameraDirection: this.camera.Direction.FRONT,
+      sourceType: type == 1 ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY
+    }
 
     try {
       let imageData = await this.camera.getPicture(options);
       this.commonService.showLoader("Uploading...");
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       const cameraPicture = base64Image;
-      const fileName = this.commonService.makeid(8)+".jpg";
+      const fileName = this.commonService.makeid(8) + ".jpg";
       const pictures = storage().ref(fileName);
-      let snapshot = await pictures.putString(cameraPicture,'data_url');
+      let snapshot = await pictures.putString(cameraPicture, 'data_url');
       let downloadURL = await snapshot.ref.getDownloadURL();
       this.cameraPicture = downloadURL;
       let userId: any = await this.authService.getUserInfo();
@@ -162,7 +160,7 @@ export class ProfilePage implements OnInit {
       }
       let resp = await this.authService.updateUserDetails(userDetail, userInfo.id);
       this.commonService.hideLoader();
-      if(resp){
+      if (resp) {
         this.commonService.showSuccessMessage("Picture has been uploaded");
       } else {
         this.commonService.showErrorMessage("Something occured during upload");

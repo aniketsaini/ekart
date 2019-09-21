@@ -14,15 +14,16 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  
 
-  name='Admin';
+
+  name = 'Admin';
   userId: string;
+  cameraPicture: any = "assets/profile.svg";
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private modalController:ModalController,
+    private modalController: ModalController,
     private menuController: MenuController,
     private routerController: Router,
     private router: Router,
@@ -51,24 +52,24 @@ export class AppComponent {
     this.routerController.navigateByUrl("login");
   }
 
-  orders = async () =>{
+  orders = async () => {
     this.menuController.close();
     this.routerController.navigateByUrl("orders");
   }
 
-  home = async () =>{
+  home = async () => {
     this.menuController.close();
     this.routerController.navigateByUrl("home");
   }
 
 
-  profile = async () =>{
+  profile = async () => {
     this.menuController.close();
     this.routerController.navigateByUrl("profile");
   }
 
   ngOnInit() {
-   
     
   }
+
 }

@@ -1,30 +1,39 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Query } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { async, promised, resolve } from 'q';
+import { NgIf } from '@angular/common';
+import { Navigation } from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  
+
   constructor(
-    private db: AngularFirestore,
+    private db: AngularFirestore
   ) {
   }
 
 
-  getFilteredProductList = async (name: string = "", price: number = 0) => {
+  getFilteredProductList = async (data: any = {}) => {
     let cthis = this;
     return new Promise((resolve) => {
       var productList: Array<any> = [];
       var docRef = this.db.collection("products");
-      var query;
-      if (name !== "") {
-        query = docRef.ref.orderBy("name").startAt(name).endAt(name+"\uf8ff");
-      } else {
-        query = docRef.ref.where("price", ">", price);
+      docRef.ref.orderBy("price").where("price", ">=", 0);
+      // if (data.name !== undefined && data.name !== "") {
+      //   query.startAt(data.name).endAt(data.name + "\uf8ff");
+      // }
+      if (data.color !== undefined && data.color !== "") {
+        docRef.ref.where("color", "==", data.color);
       }
-
-      query.get().then(function (querySnapshot) {
+      // if (data.category !== undefined && data.category !== "") {
+      //   query.where("category", "==", data.category);
+      // }
+      // if (data.price !== undefined && data.price > 0) {
+      //   query.where("price", ">=", data.price);
+      // }
+      docRef.ref.get().then(function (querySnapshot) {
         if (querySnapshot.empty) {
           resolve([]);
         }
@@ -43,6 +52,7 @@ export class ProductService {
           }
         });
       }).catch(function (error) {
+        console.log(error);
         resolve([]);
       });
     });
@@ -101,4 +111,5 @@ export class ProductService {
       });
     });
   }
+
 }

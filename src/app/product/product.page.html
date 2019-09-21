@@ -36,11 +36,10 @@
           <ion-label>
             <ion-text>Quantity:</ion-text>
           </ion-label>
-          <ion-input>
-            <ion-select placeholder="Select" [(ngModel)]="total">
-              <ion-select-option *ngFor="let i of quantity">{{i}}</ion-select-option>
+            <ion-select [(ngModel)]="total" placeholder="Select Quantity">
+              <ion-select-option *ngFor="let i of quantity" [selected]="productInfo.quantity === i">{{i}}
+              </ion-select-option>
             </ion-select>
-          </ion-input>
         </ion-item>
 
       </div>

@@ -63,32 +63,26 @@ export class ProductPage implements OnInit {
     this.productList();
   }
 
+
   async addToCart(productId: any) {
-    if(this.total === 0){
+    if (this.total === 0) {
       this.commonService.showErrorMessage("Please select quantity");
       return;
     }
     let cartDetail: any = await this.cartService.getCart(productId, this.userId.uid);
     let productInfo: any = {
       product_id: productId,
-      user_id: this.userId.uid,
+      user_id: this.userId.uid
     };
     let resp: any;
-    if (cartDetail) {
+    (cartDetail) 
       let quantity: number = cartDetail.quantity = (this.total * 1);
       productInfo['quantity'] = quantity;
       resp = await this.cartService.updateCart(productInfo, cartDetail.id);
-    } else {
-      let quantity: number = 1;
-      productInfo['quantity'] = quantity;
-      resp = await this.cartService.addCart(productInfo);
-      this.cartCounter++;
-    }
     if (resp) {
       this.commonService.showSuccessMessage("Product has been added into cart");
     } else {
       this.commonService.showErrorMessage("Can not add into cart");
     }
-
   }
 }

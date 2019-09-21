@@ -15,7 +15,7 @@ export class AuthenticationService {
     private _firebaseAuth: AngularFireAuth,
     private commonService: CommonService,
     private db: AngularFirestore
-  ) {}
+  ) { }
 
   getUserInfo = () => {
     return new Promise((resolve) => {

@@ -18,7 +18,7 @@ export class HomePage {
   products: any;
   cartCounter: number = 0;
   userId: any;
-  total:any;
+  total: any;
   searchTerm: any;
 
   constructor(
@@ -38,22 +38,28 @@ export class HomePage {
 
   }
 
-  async onSearch(e){
-    await this.productList(e.target.value);
+  async onSearch(e) {
+    let data: any = {};
+    if(e.target.value !== ""){
+      data = {
+        name: e.target.value
+      }
+    }
+    await this.productList(data);
   }
 
   async openModal() {
     const myModal = await this.modalController.create({
       component: ModalPage
     });
-    return await myModal.present();
+    await myModal.present();
+    let data = await myModal.onWillDismiss();
+    this.productList(data.data);
   }
 
-  productList = async (name: string = "") => {
-    this.products = await this.productService.getFilteredProductList(name);
+  productList = async (data: any = {}) => {
+    this.products = await this.productService.getFilteredProductList(data);
   }
-
-
   toggleMenu = (type: number) => {
     if (type === 1) {
       this.commonService.openMenu();
@@ -78,7 +84,7 @@ export class HomePage {
       user_id: this.userId.uid
     };
     let resp: any;
-    if(cartDetail){
+    if (cartDetail) {
       let quantity: number = cartDetail.quantity + 1;
       productInfo['quantity'] = quantity;
       resp = await this.cartService.updateCart(productInfo, cartDetail.id);
@@ -88,7 +94,7 @@ export class HomePage {
       resp = await this.cartService.addCart(productInfo);
       this.cartCounter++;
     }
-    if(resp){
+    if (resp) {
       this.commonService.showSuccessMessage("Product has been added into cart");
     } else {
       this.commonService.showErrorMessage("Can not add into cart");
