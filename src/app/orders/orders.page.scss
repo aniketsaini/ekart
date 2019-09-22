@@ -1,14 +1,7 @@
 .header-md:after {
     display: none;
 }
-ion-header{
-    ion-toolbar{
-        --background:rgb(248, 149, 68); 
-        border-radius: 4px;
-        font-size: 8px; 
-        color: black;
-    }
-}
+
 ion-content{
     .container{
     background-color:rgb(238, 235, 235);

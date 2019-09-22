@@ -19,6 +19,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { Camera } from '@ionic-native/camera/ngx';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

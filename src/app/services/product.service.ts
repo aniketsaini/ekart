@@ -20,20 +20,20 @@ export class ProductService {
     return new Promise((resolve) => {
       var productList: Array<any> = [];
       var docRef = this.db.collection("products");
-      docRef.ref.orderBy("price").where("price", ">=", 0);
-      // if (data.name !== undefined && data.name !== "") {
-      //   query.startAt(data.name).endAt(data.name + "\uf8ff");
-      // }
-      if (data.color !== undefined && data.color !== "") {
-        docRef.ref.where("color", "==", data.color);
+      var query = docRef.ref.orderBy("price").where("price", ">=", 0);
+      if (data.name !== undefined && data.name !== "") {
+        query = docRef.ref.orderBy("name").startAt(data.name).endAt(data.name + "\uf8ff");
       }
-      // if (data.category !== undefined && data.category !== "") {
-      //   query.where("category", "==", data.category);
-      // }
-      // if (data.price !== undefined && data.price > 0) {
-      //   query.where("price", ">=", data.price);
-      // }
-      docRef.ref.get().then(function (querySnapshot) {
+      if (data.color !== undefined && data.color !== "") {
+        query = docRef.ref.where("color", "==", data.color);
+      }
+      if (data.category !== undefined && data.category !== "") {
+        query = docRef.ref.where("category", "==", data.category);
+      }
+      if (data.price !== undefined && data.price > 0) {
+        query = docRef.ref.orderBy("price").where("price", ">=", data.price);
+      }
+      query.get().then(function (querySnapshot) {
         if (querySnapshot.empty) {
           resolve([]);
         }

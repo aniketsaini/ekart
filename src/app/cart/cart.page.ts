@@ -54,4 +54,8 @@ export class CartPage implements OnInit {
     console.log(id, e.target.value);
   }
 
+  checkout = () => {
+    this.router.navigateByUrl("checkout");
+  }
+
 }
