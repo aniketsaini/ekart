@@ -75,10 +75,16 @@ export class ProductPage implements OnInit {
       user_id: this.userId.uid
     };
     let resp: any;
-    (cartDetail) 
+    if (cartDetail) {
       let quantity: number = cartDetail.quantity = (this.total * 1);
       productInfo['quantity'] = quantity;
       resp = await this.cartService.updateCart(productInfo, cartDetail.id);
+    } else {
+      let quantity: number = 1;
+      productInfo['quantity'] = quantity;
+      resp = await this.cartService.addCart(productInfo);
+      this.cartCounter++;
+    }
     if (resp) {
       this.commonService.showSuccessMessage("Product has been added into cart");
     } else {

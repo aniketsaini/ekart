@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { NgPaymentCardModule } from 'ng-payment-card';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CheckoutPage } from './checkout.page';
+import { CheckoutPage } from './checkout.page'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgPaymentCardModule } from 'ng-payment-card';
 
 const routes: Routes = [
   {
@@ -20,6 +20,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     NgPaymentCardModule,
     RouterModule.forChild(routes)

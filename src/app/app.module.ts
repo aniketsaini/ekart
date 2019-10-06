@@ -17,6 +17,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { Camera } from '@ionic-native/camera/ngx';
+import { Stripe } from '@ionic-native/stripe/ngx';
 
 
 
@@ -40,6 +41,7 @@ import { Camera } from '@ionic-native/camera/ngx';
     SplashScreen,
     Camera,
     NavController,
+    Stripe,
     
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
