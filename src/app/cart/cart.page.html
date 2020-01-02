@@ -22,7 +22,7 @@
       <ion-item>
         <ion-label>Qty:</ion-label>
         <ion-select (ionChange)="updateCart(productInfo.product_id, $event)">
-          <ion-select-option *ngFor="let i of quantity" [selected]="productInfo.quantity === i" >
+          <ion-select-option *ngFor="let i of quantity" [selected]="productInfo.quantity === i">
             {{i}}
           </ion-select-option>
         </ion-select>
@@ -30,9 +30,14 @@
     </div>
   </div>
 
+  <div *ngIf="empty" class="empty">
+    <h1>There are no items in your shopping cart.</h1>
+    <p><a routerLink="/home">SELECT PRODUCTS</a></p>
+  </div>
+
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="checkoutButton">
 
   <ion-button expand="block" fill="outline" (click)="checkout()">Checkout</ion-button>
 

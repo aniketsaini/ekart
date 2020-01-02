@@ -43,7 +43,7 @@ export class RegisterPage implements OnInit {
 
       let isValid = control.root.value[field_name] == input
       if (!isValid)
-        return { 'equalTo': { isValid } }       
+        return { 'equalTo': { isValid } }
       else
         return null;
     };
@@ -55,8 +55,9 @@ export class RegisterPage implements OnInit {
       await this.commonService.showLoader("Registering...");
       let resp = await this.authService.register(data.email, data.password);
       await this.commonService.hideLoader();
-      if(resp)
-        this.routes.navigateByUrl("home");
+      if (resp)
+        this.registerData.reset();
+      this.routes.navigateByUrl("home");
     }
   }
 }

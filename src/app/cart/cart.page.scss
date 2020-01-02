@@ -1,113 +1,129 @@
-
-
-ion-content{
-    .product{
+ion-content {
+    .product {
         background-color: rgb(247, 244, 244);
-        height: auto;
-        width: 100%;
-        margin-top: 6px;
-        float: left;
-        display: block;
-        border-radius: 2px;
-        padding-top: 6px;
-        padding-bottom: 5px;
-        border: 1px solid rgb(110, 109, 109);
-        .image{
+        height          : auto;
+        width           : 100%;
+        margin-top      : 6px;
+        float           : left;
+        display         : block;
+        border-radius   : 2px;
+        padding-top     : 6px;
+        padding-bottom  : 5px;
+        border          : 1px solid rgb(110, 109, 109);
+
+        .image {
             height: 90px;
-            width: 90px;
-            float: left;
-          
-            margin-top: 5px;
+            width : 90px;
+            float : left;
+
+            margin-top : 5px;
             margin-left: 5px;
-            display: block;
-            ion-img{
-                width: 90px;
+            display    : block;
+
+            ion-img {
+                width : 90px;
                 height: 90px;
             }
         }
-        .name{
-            float: left;
-            text-align: left;
-            display: block;
-            width: auto;
-            height: 25px;
+
+        .name {
+            float           : left;
+            text-align      : left;
+            display         : block;
+            width           : auto;
+            height          : 25px;
             background-color: transparent;
-            color: black;
-            margin-top: 0px;
-            margin-left: 15px;
-            margin-bottom: 5px;
+            color           : black;
+            margin-top      : 0px;
+            margin-left     : 15px;
+            margin-bottom   : 5px;
         }
-        .price{
-            float: left;
-            text-align: left;
-            display: block;
-            width: 30%;
-            height: 25px;
+
+        .price {
+            float           : left;
+            text-align      : left;
+            display         : block;
+            width           : 30%;
+            height          : 25px;
             background-color: transparent;
-            color: black;
-            margin-top: 1px;
-            margin-left: 15px;
+            color           : black;
+            margin-top      : 1px;
+            margin-left     : 15px;
         }
-        .quantity{
-            margin-top: 0;
-            float: left;
+
+        .quantity {
+            margin-top      : 0;
+            float           : left;
             background-color: transparent;
-            color: black;
-            ion-item{
-                --background:transparent;
+            color           : black;
+
+            ion-item {
+                --background : transparent;
                 border-radius: 7px;
-                padding: 0;
-                width: 140px;
-                height: 45px;
-                
-                ion-label{
+                padding      : 0;
+                width        : 140px;
+                height       : 45px;
+
+                ion-label {
                     font-size: 15px;
-                    width: 40px;
-                    margin: 0;
-                    padding: 0;
+                    width    : 40px;
+                    margin   : 0;
+                    padding  : 0;
                 }
-                ion-select{
+
+                ion-select {
                     font-size: 15px;
-                    margin: 0;
-                    padding: 0;
+                    margin   : 0;
+                    padding  : 0;
                 }
             }
         }
-        .total{
-            height: 70px;
-            width: 20%;
-            float: right;
-            background-color:transparent;
-            display: block;
-            text-align: center;
-            font-size: 25px;
-            color: black;
-            border-left: 1px solid rgb(110, 109, 109);
-            margin-top: 15px;
-            padding-top: 10px;
-            .count{
-            text-align: center;
-            font-size: 15px;
+
+        .total {
+            height          : 70px;
+            width           : 20%;
+            float           : right;
+            background-color: transparent;
+            display         : block;
+            text-align      : center;
+            font-size       : 25px;
+            color           : black;
+            border-left     : 1px solid rgb(110, 109, 109);
+            margin-top      : 15px;
+            padding-top     : 10px;
+
+            .count {
+                text-align: center;
+                font-size : 15px;
             }
         }
+    }
+
+    .empty {
+        width      : 90%;
+        margin-left: 5%;
+        margin-top : 200px;
+        text-align : center;
     }
 }
 
-ion-footer{
-    position: static;
+ion-footer {
+    position     : static;
     margin-bottom: 5px;
-       ion-button{
-        --border-color:orange; 
-        --border-width:2px;
-        color: orange; 
-        --background-activated:rgb(247, 170, 108); 
-        --color-activated:rgb(255, 255, 255); 
-        height: 60px;
-        font-size: 20px;
-        margin-left: 1%;
-        margin-right: 1%;
+
+    ion-button {
+        --border-color        : orange;
+        --border-width        : 2px;
+        color                 : orange;
+        --background-activated: rgb(247, 170, 108);
+        --color-activated     : rgb(255, 255, 255);
+        height                : 60px;
+        font-size             : 20px;
+        margin-left           : 1%;
+        margin-right          : 1%;
     }
 }
+
 .header-md:after {
     display: none;
 }

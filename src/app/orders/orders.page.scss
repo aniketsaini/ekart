@@ -2,111 +2,137 @@
     display: none;
 }
 
-ion-content{
-    .container{
-    background-color:rgb(238, 235, 235);
-    width: 96%;
-    height: auto;
-    margin-left: 2%;
-    margin-top: 10px;
-    border-radius: 2px;
-    float: left;
-    color: black;
+ion-content {
+    .container {
+        background-color: rgb(238, 235, 235);
+        width           : 96%;
+        height          : auto;
+        margin-left     : 2%;
+        margin-top      : 10px;
+        border-radius   : 2px;
+        float           : left;
+        color           : black;
     }
-    .date{
-        width: 100%;
-        height: auto;
-        float: left;
-        text-align: center;
-        font-size: 25px;
-        padding-top: 5px;
+
+    .date {
+        width        : 100%;
+        height       : auto;
+        float        : left;
+        text-align   : center;
+        font-size    : 25px;
+        padding-top  : 5px;
         margin-bottom: 10px;
     }
-    .amount{
+
+    .amount {
         background-color: rgb(241, 238, 238);
-        width: 100%;
-        height: auto;
-        float: left;
-        text-align: center;
-        font-size: 25px;
-        border: 2px solid rgb(153, 151, 151);
-        border-radius: 3px;
-        .left{
-        background-color: transparent;
-        width: 50%;
-        height: auto;
-        float: left;
-        text-align: center;
-        font-size: 25px;
+        width           : 100%;
+        height          : auto;
+        float           : left;
+        text-align      : center;
+        font-size       : 25px;
+        border          : 2px solid rgb(153, 151, 151);
+        border-radius   : 3px;
+
+        .left {
+            background-color: transparent;
+            width           : 50%;
+            height          : auto;
+            float           : left;
+            text-align      : center;
+            font-size       : 25px;
         }
-        .right{
-        background-color: transparent;
-        width: 50%;
-        height: 2cm;
-        float: left;
-        text-align: center;
-        font-size: 25px;
+
+        .right {
+            background-color: transparent;
+            width           : 50%;
+            height          : 2cm;
+            float           : left;
+            text-align      : center;
+            font-size       : 25px;
         }
     }
-    .product{
-        width: 96%;
-        height: auto;
-        float: left;
-        text-align: center;
-        margin-left: 2%;
-        margin-bottom: 10px;
-        background-color:rgb(255, 255, 255); 
-        border-radius: 2px;
-        .image{
-        width: 25%;
-        height: 100px;
-        float: left;
-        text-align: center;
-      
-        padding: 6px;
-        ion-img{
-            width: 100%;
-            height: 100%;
-        }
-        }
-        .name{
-        width: 50%;
-        height: 50px;
-        float: left;
-        text-align: left;
-        font-size: 18px;
-        border-bottom: 1px solid rgb(63, 63, 63);
-        padding-left: 5px;
-        }
-        .total{
-        width: 25%;
-        height: 100px;
-        float: right;
-        text-align: center; 
-        font-size: 25px;
-        border-left: 1px solid rgb(214, 210, 210);
-        border-radius: 1px;
-        }
-        .quantity{
-        width: 25%;
-        height: 50px;
-        float: left;
-        text-align: center; 
-        border-right: 1px solid rgb(63, 63, 63);
-        ion-item{
-            width: auto;
-            float: right;
-            height: auto;
-            ion-input{
-                width: 15px;
+
+    .product {
+        width           : 96%;
+        height          : auto;
+        float           : left;
+        text-align      : center;
+        margin-left     : 2%;
+        margin-bottom   : 10px;
+        background-color: rgb(255, 255, 255);
+        border-radius   : 2px;
+        border: 1px solid #6f6f6f;
+
+        .image {
+            width     : 25%;
+            height    : 100px;
+            float     : left;
+            text-align: center;
+            border-right: 1px solid #6f6f6f;
+            padding: 6px;
+
+            ion-img {
+                width : 100%;
+                height: 100%;
             }
         }
+
+        .name {
+            width        : 75%;
+            height       : 50px;
+            float        : left;
+            text-align   : left;
+            font-size    : 18px;
+            border-bottom: 1px solid rgb(63, 63, 63);
+            padding-left : 5px;
         }
-        .price{
-        width: 25%;
-        height: 50px;
-        float: left;
-        text-align: center; 
+
+        .total {
+            width        : 100%;
+            float        : right;
+            text-align   : center;
+            font-size    : 23px;
+            border-top  : 1px solid  #6f6f6f;
+            border-radius: 1px;
+            color        : rgb(29, 28, 28);
+
+            p {
+                margin-top   : 4px;
+                margin-bottom: 4px;
+            }
         }
+
+        .quantity {
+            width       : 25%;
+            height      : 50px;
+            float       : left;
+            text-align  : center;
+            border-right: 1px solid rgb(63, 63, 63);
+
+            ion-item {
+                width : auto;
+                float : right;
+                height: auto;
+
+                ion-input {
+                    width: 15px;
+                }
+            }
+        }
+
+        .price {
+            width     : 25%;
+            height    : 50px;
+            float     : left;
+            text-align: center;
+        }
+    }
+
+    .empty {
+        width      : 90%;
+        margin-left: 5%;
+        margin-top : 200px;
+        text-align : center;
     }
 }

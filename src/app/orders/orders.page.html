@@ -9,32 +9,32 @@
 
 <ion-content>
 
-  <div class="container">
+  <div class="container" *ngFor="let orderProducts of orderProducts">
 
     <div class="date">
-       {{todaydate | date:'d MMM y'}}
+      {{orderProducts.createdAt | date}}
     </div>
 
-    <div class="product">
+    <div class="product" *ngFor="let product of orderProducts.products">
 
       <div class="image">
-        <ion-img [src]="pink"></ion-img>
+        <ion-img src="{{product.productImage}}"></ion-img>
       </div>
 
       <div class="name">
-        <p>Name:</p>
-      </div>
-
-      <div class="total">
-        <p>Total $1000</p>
+        <p>Name: {{product.productName}}</p>
       </div>
 
       <div class="quantity">
-        <p>Qty:</p>
+        <p>Qty: {{product.quantity}}</p>
       </div>
 
       <div class="price">
-        <p>Price: $200</p>
+        <p>Price: ${{product.price}}</p>
+      </div>
+
+      <div class="total">
+        <p>Total: ${{product.quantity * product.price }}</p>
       </div>
 
     </div>
@@ -45,9 +45,15 @@
       </div>
 
       <div class="right">
+        <p> $ {{orderProducts.amount}}</p>
       </div>
     </div>
 
+  </div>
+
+  <div *ngIf="empty" class="empty">
+    <h1>You ordered nothing.</h1>
+    <p><a routerLink="/home">CONTINUE SHOPPING</a></p>
   </div>
 
 </ion-content>

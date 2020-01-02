@@ -17,7 +17,8 @@ export class ProfilePage implements OnInit {
   profile: FormGroup;
   showError: boolean = false;
   productId: any;
-  cameraPicture: any = "assets/profile.svg";
+  picture: any = "assets/profile.svg";
+  cameraPicture: any;
 
   constructor(
     private commonService: CommonService,
@@ -54,22 +55,36 @@ export class ProfilePage implements OnInit {
         Validators.pattern(/(7|8|9|6)\d{9}/)
       ])),
     });
+
+  }
+
+  ionViewWillEnter() {
     this.getUserInfo();
   }
 
   getUserInfo = async () => {
-    let userId: any = await this.authService.getUserInfo();
-    let userInfo: any = await this.authService.getUserDetails(userId.uid);
-    if (userInfo) {
-      this.profile.controls.email.setValue(userInfo.email);
-      this.profile.controls.firstName.setValue(userInfo.first_name);
-      this.profile.controls.lastName.setValue(userInfo.last_name);
-      this.profile.controls.phoneNumber.setValue(userInfo.phone);
-      if (userInfo.profile_picture)
-        this.cameraPicture = userInfo.profile_picture;
-    } else {
-      this.profile.controls.email.setValue(userId.email);
+    try {
+      this.commonService.showLoader("Please wait...")
+      let userId: any = await this.authService.getUserInfo();
+      let userInfo: any = await this.authService.getUserDetails(userId.uid);
+      this.commonService.hideLoader();
+      if (userInfo) {
+        this.profile.controls.email.setValue(userInfo.email);
+        this.profile.controls.firstName.setValue(userInfo.first_name);
+        this.profile.controls.lastName.setValue(userInfo.last_name);
+        this.profile.controls.phoneNumber.setValue(userInfo.phone);
+        if (userInfo.profile_picture) {
+          this.picture = userInfo.profile_picture;
+        } else {
+          this.picture;
+        }
+      } else {
+        this.profile.controls.email.setValue(userId.email);
+      }
+    } catch (error) {
+      this.commonService.hideLoader();
     }
+
   }
 
 
@@ -77,6 +92,7 @@ export class ProfilePage implements OnInit {
     this.showError = true;
     if (this.profile.status !== 'INVALID') {
       this.showError = false;
+      this.commonService.showLoader("Saving changes...")
       let userId: any = await this.authService.getUserInfo();
       let userInfo: any = await this.authService.getUserDetails(userId.uid);
       let userDetail: any = {
@@ -84,9 +100,10 @@ export class ProfilePage implements OnInit {
         last_name: data.lastName,
         email: data.email,
         phone: data.phoneNumber,
-        profile_picture: userInfo.profile_picture,
         user_id: userId.uid
       }
+
+      this.commonService.hideLoader();
       let resp;
       if (userInfo) {
         resp = await this.authService.updateUserDetails(userDetail, userInfo.id);
@@ -98,6 +115,10 @@ export class ProfilePage implements OnInit {
       } else {
         this.commonService.showErrorMessage("User details can not saved.");
       }
+    }
+    else {
+      this.commonService.hideLoader();
+      this.commonService.showErrorMessage("Something went wrong.");
     }
   }
 

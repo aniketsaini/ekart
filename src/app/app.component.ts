@@ -26,7 +26,6 @@ export class AppComponent {
     private modalController: ModalController,
     private menuController: MenuController,
     private routerController: Router,
-    private router: Router,
     private authService: AuthenticationService
   ) {
     this.initializeApp();
@@ -48,7 +47,6 @@ export class AppComponent {
 
   logOut = async () => {
     await this.authService.signOut();
-    this.menuController.close();
     this.routerController.navigateByUrl("login");
   }
 
@@ -69,7 +67,14 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    
-  }
 
+  }
+  getUserInfo = async () => {
+    let userId: any = await this.authService.getUserInfo();
+    let userInfo: any = await this.authService.getUserDetails(userId.uid);
+    (userInfo)
+    console.log(userInfo.email);
+    if (userInfo.profile_picture)
+      this.cameraPicture = userInfo.profile_picture;
+  }
 }

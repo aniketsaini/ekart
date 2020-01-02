@@ -1,19 +1,17 @@
-import { Injectable, Query } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { async, promised, resolve } from 'q';
-import { NgIf } from '@angular/common';
-import { Navigation } from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  getOrderDetails(orderId: any, arg1: boolean): any {
+    throw new Error("Method not implemented.");
+  }
 
   constructor(
     private db: AngularFirestore
-  ) {
-  }
-
+  ) {}
 
   getFilteredProductList = async (data: any = {}) => {
     let cthis = this;
@@ -82,7 +80,7 @@ export class ProductService {
         resolve([]);
       });
     });
-
+    
   }
 
   getAllProductImages = async (productId: string, isDefault: boolean = false) => {

@@ -44,13 +44,26 @@ export class ProductPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getProductDetails();
+    
   }
 
 
 
   getProductDetails = async () => {
-    this.productInfo = await this.productService.getProductDetail(this.productId);
+    try {
+      this.commonService.showLoader("Please wait...");
+      let resp = await this.productService.getProductDetail(this.productId);
+      this.commonService.hideLoader();
+      if (resp) {
+        this.productInfo = resp;
+      }
+      else {
+        this.commonService.showErrorMessage("Something went wrong...")
+      }
+    } catch (error) {
+      this.commonService.hideLoader();
+      this.commonService.showErrorMessage("Something went wrong...")
+    }
   }
   productList = async () => {
     this.products = await this.productService.getFilteredProductList();
@@ -61,10 +74,12 @@ export class ProductPage implements OnInit {
     let cartDetails: any = await this.cartService.getCartDetails(this.userId.uid);
     this.cartCounter = cartDetails.length;
     this.productList();
+    this.getProductDetails();
   }
 
 
   async addToCart(productId: any) {
+    this.commonService.showLoader('Adding to cart...')
     if (this.total === 0) {
       this.commonService.showErrorMessage("Please select quantity");
       return;
@@ -85,6 +100,7 @@ export class ProductPage implements OnInit {
       resp = await this.cartService.addCart(productInfo);
       this.cartCounter++;
     }
+    this.commonService.hideLoader();
     if (resp) {
       this.commonService.showSuccessMessage("Product has been added into cart");
     } else {

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ProductService } from './product.service';
-import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +55,7 @@ export class CartService {
     return new Promise((resolve) => {
       var docRef = this.db.collection("cart");
       var query = docRef.ref.where("user_id", "==", userId).where("product_id", "==", productId);
-
+      
       query.get().then(function (querySnapshot) {
         if (querySnapshot.empty) {
           resolve(false);
@@ -80,6 +79,17 @@ export class CartService {
     return new Promise((resolve) => {
       let docRef = this.db.collection("cart").doc(id);
       docRef.set(data).then(() => {
+        resolve(true);
+      }).catch((err) => {
+        resolve(false);
+      });
+    });
+  }
+
+  deleteCart = (id) => {
+    return new Promise((resolve) => {
+      let docRef = this.db.collection("cart").doc(id);
+      docRef.delete().then(() => {
         resolve(true);
       }).catch((err) => {
         resolve(false);

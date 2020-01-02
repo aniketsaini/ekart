@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ToastController, MenuController, LoadingController } from '@ionic/angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
   loading: any;
+  private apiUrl:string = "https://e-kart-test.herokuapp.com";
   constructor(
     private toast: ToastController,
     private menu: MenuController,
-    private loader: LoadingController
+    private loader: LoadingController,
+    private http: HttpClient
   ) { }
 
   showErrorMessage = async (msg: string) => {
@@ -51,12 +54,27 @@ export class CommonService {
   }
 
   makeid = (length) => {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
- }
+  }
+
+  post = async (url: string, data: any) => {
+    return await new Promise((resolve) => {
+      this.http.post(this.apiUrl + url, data, {
+        headers: new HttpHeaders({
+          'Content-type': 'application/json'
+        })
+      })
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          resolve(false);
+        });
+    });
+  }
 }

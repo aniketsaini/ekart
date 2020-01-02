@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../services/common.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, MenuController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { ProductService } from '../services/product.service';
 import { Router, NavigationExtras } from '@angular/router';
@@ -27,7 +27,8 @@ export class HomePage {
     private productService: ProductService,
     private cartService: CartService,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private menu: MenuController
   ) { }
 
   async ionViewWillEnter() {
@@ -36,11 +37,13 @@ export class HomePage {
     this.cartCounter = cartDetails.length;
     this.productList();
 
+    this.menu.enable(true);
+
   }
 
   async onSearch(e) {
     let data: any = {};
-    if(e.target.value !== ""){
+    if (e.target.value !== "") {
       data = {
         name: e.target.value
       }
@@ -58,8 +61,23 @@ export class HomePage {
   }
 
   productList = async (data: any = {}) => {
-    this.products = await this.productService.getFilteredProductList(data);
+    try {
+      this.commonService.showLoader('Please wait...');
+      let resp:any = await this.productService.getFilteredProductList(data);
+      this.commonService.hideLoader();
+      if (resp) {
+        this.products = resp;
+      } else {
+        this.commonService.hideLoader();
+        this.commonService.showErrorMessage("Something went wrong");
+      }
+    } catch (error) {
+      this.commonService.hideLoader();
+      this.commonService.showErrorMessage("Something went wrong");
+    }
+
   }
+
   toggleMenu = (type: number) => {
     if (type === 1) {
       this.commonService.openMenu();
@@ -78,6 +96,7 @@ export class HomePage {
   }
 
   async addToCart(productId: any) {
+    this.commonService.showLoader("Adding to cart...")
     let cartDetail: any = await this.cartService.getCart(productId, this.userId.uid);
     let productInfo: any = {
       product_id: productId,
@@ -94,6 +113,7 @@ export class HomePage {
       resp = await this.cartService.addCart(productInfo);
       this.cartCounter++;
     }
+    this.commonService.hideLoader();
     if (resp) {
       this.commonService.showSuccessMessage("Product has been added into cart");
     } else {

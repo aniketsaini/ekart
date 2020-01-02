@@ -4,9 +4,9 @@ ion-content{
         text-align: center;
         background-color: rgb(243, 241, 241);
         width: 68%;
-        height: 30%;
         padding-bottom: 25px;
         padding-top: 25px; 
+        height: 30%;
         float: left;
        
         ion-avatar{
@@ -35,6 +35,15 @@ ion-content{
             background-color: rgb(243, 241, 241);
             height: 30%;
             padding-top: 18%; 
+        }
+        @media only screen and (max-width: 375px) {
+            .edit{
+                height: 202px;
+            }
+
+            .image{
+                height: auto;
+            }
         }
     .container{
         text-align: center;

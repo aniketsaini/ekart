@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { CommonService } from '../services/common.service';
+import { MenuController } from '@ionic/angular';
 
 
 @Component({
@@ -18,10 +19,11 @@ export class LoginPage implements OnInit {
   userInfo: any;
 
   constructor(
-    private service: AuthenticationService, 
+    private service: AuthenticationService,
     private routes: Router,
-    private commonService: CommonService
-    ) { }
+    private commonService: CommonService,
+    private menu: MenuController
+  ) { }
 
   ngOnInit() {
     this.loginData = new FormGroup({
@@ -36,6 +38,11 @@ export class LoginPage implements OnInit {
 
     });
   }
+
+  ionViewWillEnter() {
+    this.menu.enable(false);
+  }
+
   onClickSubmit = async (data) => {
     this.showError = true;
     if (this.loginData.status !== 'INVALID') {
@@ -44,8 +51,9 @@ export class LoginPage implements OnInit {
       let resp = await this.service.auth(data.email, data.password);
       await this.commonService.hideLoader();
       console.log(resp);
-      if(resp)
-        this.routes.navigateByUrl("home");
+      if (resp)
+        this.loginData.reset();
+      this.routes.navigateByUrl("home");
     }
   }
 }

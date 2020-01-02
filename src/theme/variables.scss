@@ -154,6 +154,23 @@ ion-header{
   top: 63% !important;
   right: 98% !important;
 }
+
+@media only screen and (max-width: 360px) {
+  .cc-form__button {
+    width: 345px !important;
+    top: 63% !important;
+    right: 97% !important;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .cc-form__button {
+    width: 310px !important;
+    top: 63% !important;
+    right: 96% !important;
+  }
+}
+
 .cc-form__label{
   font-size: 12px !important;
   width: 50% !important;
